@@ -712,7 +712,7 @@ h1 em {
 /* ─── INSTALL BANNER ────────────────────────────────── */
 #install-banner {
   position: fixed;
-  bottom: 72px;
+  bottom: 80px;
   left: 1rem;
   right: 1rem;
   max-width: 480px;
@@ -805,6 +805,255 @@ h1 em {
   .meal-actions { gap: 6px; }
   .btn-secondary { padding: 8px 12px; font-size: 12px; }
 }
+
+/* ─── NUTRICIONAL MODE TOGGLE ───────────────────────── */
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: 5px 6px 5px 14px;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mode-toggle.active {
+  border-color: var(--olive);
+  background: rgba(92,107,58,0.08);
+  color: var(--olive);
+}
+.mode-toggle-pill {
+  background: var(--border);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.mode-toggle.active .mode-toggle-pill {
+  background: var(--olive);
+  color: white;
+}
+.nutri-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(92,107,58,0.12);
+  color: var(--olive);
+  border: 1px solid rgba(92,107,58,0.25);
+  margin-left: 8px;
+}
+
+/* ─── HELADERA PAGE ─────────────────────────────────── */
+#page-heladera {
+  padding-top: 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 5rem;
+}
+
+.heladera-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.heladera-hero h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.heladera-hero p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.heladera-search-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+.heladera-search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+  pointer-events: none;
+}
+#heladera-input {
+  width: 100%;
+  padding: 14px 16px 14px 42px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+#heladera-input:focus { border-color: var(--rust); }
+#heladera-input::placeholder { color: var(--muted); }
+
+.ingredientes-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.chip {
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  color: var(--charcoal);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.chip:hover { border-color: var(--rust); color: var(--rust); }
+.chip.selected {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: white;
+}
+.chip .chip-emoji { font-size: 1rem; }
+
+.selected-summary {
+  background: rgba(200,80,42,0.06);
+  border: 1px solid rgba(200,80,42,0.18);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--charcoal);
+  margin-bottom: 1.25rem;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.selected-summary.visible { display: flex; }
+.selected-summary strong { color: var(--rust); }
+
+.btn-buscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px;
+  border-radius: var(--radius);
+  background: var(--rust);
+  border: none;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(200,80,42,0.25);
+}
+.btn-buscar:hover { background: var(--rust-dark); transform: translateY(-1px); }
+.btn-buscar:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.heladera-results {
+  display: none;
+}
+.heladera-results.visible { display: block; }
+
+.results-header {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+.results-count {
+  color: var(--rust);
+}
+
+.recipe-result-card {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.recipe-result-card:hover {
+  border-color: var(--rust);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200,80,42,0.10);
+}
+.recipe-result-emoji {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+  width: 44px;
+  text-align: center;
+}
+.recipe-result-info { flex: 1; min-width: 0; }
+.recipe-result-name {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.recipe-result-meta {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.recipe-result-ings {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.recipe-result-ings .match {
+  color: var(--olive);
+  font-weight: 600;
+}
+.recipe-result-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+.no-results .icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.no-results p { font-size: 14px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -838,6 +1087,11 @@ h1 em {
         <button class="filter-btn" data-tipo="almuerzo">☀️ Almuerzo</button>
         <button class="filter-btn" data-tipo="cena">🌙 Cena</button>
       </div>
+
+      <button class="mode-toggle" id="btn-mode-toggle">
+        🥗 Modo nutricional
+        <span class="mode-toggle-pill" id="mode-pill">Desactivado</span>
+      </button>
 
       <button class="btn-main" id="btn-generar">
         <span class="emoji">🎲</span>
@@ -958,6 +1212,35 @@ h1 em {
   </section>
 </div>
 
+<!-- PAGE HELADERA -->
+<div id="page-heladera" class="page">
+  <div class="heladera-hero">
+    <h2>🧊 ¿Qué tenés en la heladera?</h2>
+    <p>Seleccioná los ingredientes que tenés y te mostramos qué podés cocinar con ellos.</p>
+  </div>
+
+  <div class="heladera-search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="heladera-input" placeholder="Escribí un ingrediente..." autocomplete="off" />
+  </div>
+
+  <div class="ingredientes-chips" id="chips-container"></div>
+
+  <div class="selected-summary" id="selected-summary">
+    <span>Ingredientes seleccionados: <strong id="selected-count">0</strong></span>
+    <button class="btn-text" id="btn-clear-chips">Limpiar</button>
+  </div>
+
+  <button class="btn-buscar" id="btn-buscar" disabled>
+    🔍 Buscar recetas
+  </button>
+
+  <div class="heladera-results" id="heladera-results">
+    <div class="results-header" id="results-header"></div>
+    <div id="results-list"></div>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="nav-btn active" data-page="page-home">
@@ -971,6 +1254,10 @@ h1 em {
   <button class="nav-btn" data-page="page-history">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     Historial
+  </button>
+  <button class="nav-btn" data-page="page-heladera">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg>
+    Heladera
   </button>
 </nav>
 
@@ -994,6 +1281,10 @@ const API_KEY_PLACEHOLDER = ""; // No API key needed — set in env or use free 
 let currentMeal = null;
 let tipoFiltro = "todos";
 let deferredInstallPrompt = null;
+let modoNutricional = false;
+
+// ─── RECETAS LOCALES (100 recetas nutricionales) ─────────────────────────
+const RECETAS_100 = [{"nombre":"Pollo salteado #1","tipo":"cena","tiempo":"37 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","carne","cebolla"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #2","tipo":"cena","tiempo":"51 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","limón","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #3","tipo":"cena","tiempo":"34 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","lechuga","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #4","tipo":"almuerzo","tiempo":"24 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","lentejas","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #5","tipo":"cena","tiempo":"37 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","papa","lentejas"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #6","tipo":"cena","tiempo":"34 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","lechuga","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #7","tipo":"almuerzo","tiempo":"23 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","lentejas","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #8","tipo":"cena","tiempo":"57 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","papa","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #9","tipo":"almuerzo","tiempo":"42 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","limón","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #10","tipo":"cena","tiempo":"56 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","cebolla","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo con ensalada #11","tipo":"cena","tiempo":"42 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","lechuga","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #12","tipo":"almuerzo","tiempo":"56 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","huevo","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Tortilla de papa #13","tipo":"cena","tiempo":"15 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","huevo","zanahoria"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #14","tipo":"cena","tiempo":"54 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","lechuga","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #15","tipo":"almuerzo","tiempo":"10 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zanahoria","zapallito","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #16","tipo":"cena","tiempo":"32 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zanahoria","atun","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #17","tipo":"cena","tiempo":"50 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","cebolla","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo con ensalada #18","tipo":"cena","tiempo":"51 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","zapallito","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #19","tipo":"cena","tiempo":"54 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","limón","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #20","tipo":"almuerzo","tiempo":"20 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","atun","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #21","tipo":"cena","tiempo":"39 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["cebolla","zapallito","lentejas"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #22","tipo":"cena","tiempo":"19 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","tomate","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #23","tipo":"cena","tiempo":"28 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","papa","zanahoria"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #24","tipo":"almuerzo","tiempo":"57 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","tomate","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #25","tipo":"almuerzo","tiempo":"14 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","lentejas","carne"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #26","tipo":"cena","tiempo":"19 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","pollo","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #27","tipo":"almuerzo","tiempo":"29 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["pollo","atun","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #28","tipo":"cena","tiempo":"25 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","limón","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Tortilla de papa #29","tipo":"cena","tiempo":"23 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","pollo","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #30","tipo":"almuerzo","tiempo":"49 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","tomate","lentejas"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #31","tipo":"almuerzo","tiempo":"51 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","pollo","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #32","tipo":"cena","tiempo":"20 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","papa","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #33","tipo":"cena","tiempo":"36 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","tomate","cebolla"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #34","tipo":"cena","tiempo":"15 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","zanahoria","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #35","tipo":"cena","tiempo":"11 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","pollo","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #36","tipo":"cena","tiempo":"50 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","cebolla","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #37","tipo":"cena","tiempo":"58 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","huevo","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #38","tipo":"almuerzo","tiempo":"52 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["cebolla","morrón","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #39","tipo":"cena","tiempo":"47 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","zanahoria","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #40","tipo":"cena","tiempo":"32 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["pollo","tomate","carne"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #41","tipo":"cena","tiempo":"50 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","huevo","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #42","tipo":"cena","tiempo":"35 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","cebolla","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #43","tipo":"cena","tiempo":"50 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","lentejas","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #44","tipo":"cena","tiempo":"36 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","carne","huevo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #45","tipo":"cena","tiempo":"49 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","tomate","cebolla"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #46","tipo":"almuerzo","tiempo":"20 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["cebolla","zapallito","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #47","tipo":"cena","tiempo":"27 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","papa","carne"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #48","tipo":"cena","tiempo":"49 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","pollo","huevo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #49","tipo":"almuerzo","tiempo":"32 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","atun","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #50","tipo":"cena","tiempo":"57 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","pollo","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo con ensalada #51","tipo":"cena","tiempo":"38 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","cebolla","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #52","tipo":"cena","tiempo":"24 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","morrón","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #53","tipo":"cena","tiempo":"36 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","carne","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #54","tipo":"cena","tiempo":"49 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","lentejas","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #55","tipo":"cena","tiempo":"24 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["pollo","tomate","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #56","tipo":"almuerzo","tiempo":"40 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","papa","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #57","tipo":"cena","tiempo":"31 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","carne","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #58","tipo":"almuerzo","tiempo":"13 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","cebolla","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo con ensalada #59","tipo":"cena","tiempo":"16 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","cebolla","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #60","tipo":"cena","tiempo":"30 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["pollo","arroz","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #61","tipo":"cena","tiempo":"25 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","lentejas","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Tortilla de papa #62","tipo":"cena","tiempo":"16 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","morrón","zanahoria"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #63","tipo":"cena","tiempo":"49 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","tomate","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #64","tipo":"cena","tiempo":"60 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","zanahoria","huevo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #65","tipo":"cena","tiempo":"45 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","limón","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #66","tipo":"almuerzo","tiempo":"42 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lechuga","carne","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #67","tipo":"almuerzo","tiempo":"27 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","arroz","lentejas"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Tortilla de papa #68","tipo":"cena","tiempo":"29 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","lentejas","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #69","tipo":"cena","tiempo":"23 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","lentejas","zanahoria"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #70","tipo":"cena","tiempo":"21 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","limón","huevo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #71","tipo":"almuerzo","tiempo":"36 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","tomate","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #72","tipo":"almuerzo","tiempo":"23 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","papa","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #73","tipo":"cena","tiempo":"36 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","huevo","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #74","tipo":"cena","tiempo":"59 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["huevo","zanahoria","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #75","tipo":"almuerzo","tiempo":"42 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","lentejas","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #76","tipo":"almuerzo","tiempo":"27 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["morrón","lentejas","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #77","tipo":"almuerzo","tiempo":"57 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","cebolla","limón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #78","tipo":"cena","tiempo":"29 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","huevo","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #79","tipo":"cena","tiempo":"54 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","lentejas","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #80","tipo":"cena","tiempo":"48 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zanahoria","huevo","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #81","tipo":"cena","tiempo":"35 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","lechuga","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Arroz con pollo #82","tipo":"almuerzo","tiempo":"30 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","carne","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #83","tipo":"almuerzo","tiempo":"58 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["limón","zapallito","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #84","tipo":"cena","tiempo":"54 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["pollo","zapallito","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #85","tipo":"almuerzo","tiempo":"57 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","huevo","morrón"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #86","tipo":"cena","tiempo":"10 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["tomate","cebolla","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo con ensalada #87","tipo":"cena","tiempo":"13 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["atun","morrón","carne"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #88","tipo":"cena","tiempo":"19 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["tomate","zapallito","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #89","tipo":"cena","tiempo":"22 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["papa","cebolla","zapallito"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #90","tipo":"cena","tiempo":"45 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","arroz","tomate"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Revuelto de huevo y verduras #91","tipo":"cena","tiempo":"18 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","morrón","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #92","tipo":"almuerzo","tiempo":"54 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zanahoria","papa","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Ensalada con atún #93","tipo":"cena","tiempo":"59 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","morrón","papa"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pescado a la plancha #94","tipo":"cena","tiempo":"52 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["zapallito","carne","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #95","tipo":"cena","tiempo":"47 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["tomate","zapallito","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #96","tipo":"almuerzo","tiempo":"43 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","lechuga","arroz"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Lentejas guisadas #97","tipo":"almuerzo","tiempo":"20 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["lentejas","carne","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Carne con verduras #98","tipo":"almuerzo","tiempo":"12 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["carne","huevo","pollo"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Pollo salteado #99","tipo":"cena","tiempo":"47 minutos","dificultad":"medio","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","zapallito","atun"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."},{"nombre":"Omelette simple #100","tipo":"cena","tiempo":"58 minutos","dificultad":"fácil","descripcion":"Receta simple y equilibrada para el día a día.","ingredientes":["arroz","cebolla","lechuga"],"pasos":["Preparar ingredientes","Cocinar según corresponda","Mezclar o servir"],"consejo":"Usar poca sal y aceite para una versión más saludable."}];
 
 const MEAL_EMOJIS = {
   "milanesa": "🥩", "asado": "🥩", "empanada": "🥟", "pasta": "🍝",
@@ -1020,6 +1311,7 @@ function showPage(pageId) {
   });
   if (pageId === 'page-favs') renderFavs();
   if (pageId === 'page-history') renderHistory();
+  if (pageId === 'page-heladera') buildChips(document.getElementById('heladera-input')?.value || '');
 }
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1040,7 +1332,29 @@ btnDark.addEventListener('click', () => {
   applyDark();
 });
 
-// ─── FILTERS ────────────────────────────────────────────────────────────
+// ─── NUTRICIONAL MODE ────────────────────────────────────────────────────
+const btnModeToggle = document.getElementById('btn-mode-toggle');
+const modePill = document.getElementById('mode-pill');
+
+btnModeToggle.addEventListener('click', () => {
+  modoNutricional = !modoNutricional;
+  btnModeToggle.classList.toggle('active', modoNutricional);
+  modePill.textContent = modoNutricional ? '✅ Activo' : 'Desactivado';
+  showToast(modoNutricional ? '🥗 Modo nutricional activado' : '🎲 Modo IA activado');
+});
+
+// ─── NUTRICIONAL RANDOM ──────────────────────────────────────────────────
+function getNutricionalMeal() {
+  let pool = RECETAS_100;
+  if (tipoFiltro !== 'todos') {
+    pool = pool.filter(r => r.tipo === tipoFiltro);
+    if (pool.length === 0) pool = RECETAS_100;
+  }
+  const meal = pool[Math.floor(Math.random() * pool.length)];
+  return { ...meal, _nutricional: true };
+}
+
+
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1086,6 +1400,14 @@ async function generateMeal() {
   setTimeout(() => {
     document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
+
+  // MODO NUTRICIONAL — usa JSON local, sin API
+  if (modoNutricional) {
+    await new Promise(r => setTimeout(r, 600)); // small UX delay
+    stopTips();
+    displayMeal(getNutricionalMeal());
+    return;
+  }
 
   const tipoTexto = tipoFiltro === 'almuerzo' ? 'para el almuerzo'
     : tipoFiltro === 'cena' ? 'para la cena'
@@ -1194,10 +1516,12 @@ function displayMeal(meal) {
 
   // Meta pills
   const meta = document.getElementById('meal-meta');
+  const nutriBadge = meal._nutricional ? '<span class="pill" style="background:rgba(92,107,58,0.55);border-color:rgba(92,107,58,0.6)">🥗 Nutricional</span>' : '';
   meta.innerHTML = `
     <span class="pill">⏱ ${meal.tiempo}</span>
     <span class="pill dificultad-${meal.dificultad}">⭐ ${capitalize(meal.dificultad)}</span>
     <span class="pill">${meal.tipo === 'almuerzo' ? '☀️ Almuerzo' : '🌙 Cena'}</span>
+    ${nutriBadge}
   `;
 
   // Ingredients
@@ -1407,6 +1731,134 @@ document.getElementById('btn-close-banner').addEventListener('click', () => {
   document.getElementById('install-banner').classList.remove('visible');
   localStorage.setItem('installDismissed', '1');
 });
+
+// ─── HELADERA SEARCH ─────────────────────────────────────────────────────
+const INGREDIENTE_EMOJIS = {
+  arroz: '🍚', carne: '🥩', cebolla: '🧅', papa: '🥔', limón: '🍋',
+  atun: '🐟', huevo: '🥚', lechuga: '🥬', tomate: '🍅', lentejas: '🫘',
+  morrón: '🫑', pollo: '🍗', zanahoria: '🥕', zapallito: '🥒'
+};
+
+const ALL_INGREDIENTS = Object.keys(INGREDIENTE_EMOJIS);
+let selectedIngredients = new Set();
+
+function buildChips(filter = '') {
+  const container = document.getElementById('chips-container');
+  const visible = filter
+    ? ALL_INGREDIENTS.filter(i => i.includes(filter.toLowerCase()))
+    : ALL_INGREDIENTS;
+  container.innerHTML = visible.map(ing => `
+    <button class="chip ${selectedIngredients.has(ing) ? 'selected' : ''}" data-ing="${ing}" onclick="toggleChip('${ing}')">
+      <span class="chip-emoji">${INGREDIENTE_EMOJIS[ing]}</span>${ing}
+    </button>
+  `).join('');
+}
+
+function toggleChip(ing) {
+  if (selectedIngredients.has(ing)) {
+    selectedIngredients.delete(ing);
+  } else {
+    selectedIngredients.add(ing);
+  }
+  buildChips(document.getElementById('heladera-input').value);
+  updateSelectedSummary();
+}
+
+function updateSelectedSummary() {
+  const n = selectedIngredients.size;
+  const summary = document.getElementById('selected-summary');
+  const btn = document.getElementById('btn-buscar');
+  document.getElementById('selected-count').textContent = n;
+  summary.classList.toggle('visible', n > 0);
+  btn.disabled = n === 0;
+}
+
+document.getElementById('heladera-input').addEventListener('input', e => {
+  buildChips(e.target.value);
+  // Also allow typing an ingredient and pressing Enter
+});
+
+document.getElementById('heladera-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const val = e.target.value.trim().toLowerCase();
+    // If matches an ingredient exactly (or partial), select it
+    const match = ALL_INGREDIENTS.find(i => i === val || i.startsWith(val));
+    if (match) {
+      selectedIngredients.add(match);
+      e.target.value = '';
+      buildChips('');
+      updateSelectedSummary();
+    }
+  }
+});
+
+document.getElementById('btn-clear-chips').addEventListener('click', () => {
+  selectedIngredients.clear();
+  buildChips(document.getElementById('heladera-input').value);
+  updateSelectedSummary();
+  document.getElementById('heladera-results').classList.remove('visible');
+});
+
+document.getElementById('btn-buscar').addEventListener('click', () => {
+  if (selectedIngredients.size === 0) return;
+  const sel = Array.from(selectedIngredients);
+
+  // Score each recipe: count how many selected ingredients appear in recipe
+  const scored = RECETAS_100.map(r => {
+    const matches = r.ingredientes.filter(i => sel.includes(i));
+    return { ...r, matchCount: matches.length, matchedIngs: matches };
+  }).filter(r => r.matchCount > 0)
+    .sort((a, b) => b.matchCount - a.matchCount);
+
+  const resultsDiv = document.getElementById('heladera-results');
+  const header = document.getElementById('results-header');
+  const list = document.getElementById('results-list');
+
+  resultsDiv.classList.add('visible');
+
+  if (scored.length === 0) {
+    header.textContent = '';
+    list.innerHTML = `
+      <div class="no-results">
+        <div class="icon">🤷</div>
+        <p>No encontramos recetas con esos ingredientes.<br>Probá seleccionando más ingredientes.</p>
+      </div>`;
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  header.innerHTML = `Se encontraron <span class="results-count">${scored.length}</span> receta${scored.length !== 1 ? 's' : ''} con tus ingredientes`;
+
+  list.innerHTML = scored.map(r => {
+    const ingHtml = r.ingredientes.map(i =>
+      `<span class="${r.matchedIngs.includes(i) ? 'match' : ''}">${INGREDIENTE_EMOJIS[i] || ''} ${i}</span>`
+    ).join(' · ');
+    return `
+      <div class="recipe-result-card" onclick='loadHeladeraRecipe(${JSON.stringify(r).replace(/'/g, "&#39;")})'>
+        <div class="recipe-result-emoji">${getEmoji(r.nombre)}</div>
+        <div class="recipe-result-info">
+          <div class="recipe-result-name">${r.nombre} <span class="nutri-badge">🥗 ${r.matchCount}/${r.ingredientes.length}</span></div>
+          <div class="recipe-result-meta">
+            <span>⏱ ${r.tiempo}</span>
+            <span>${r.dificultad === 'fácil' ? '⭐ Fácil' : r.dificultad === 'difícil' ? '⭐⭐⭐ Difícil' : '⭐⭐ Medio'}</span>
+            <span>${r.tipo === 'almuerzo' ? '☀️ Almuerzo' : '🌙 Cena'}</span>
+          </div>
+          <div class="recipe-result-ings">${ingHtml}</div>
+        </div>
+        <div class="recipe-result-arrow">→</div>
+      </div>`;
+  }).join('');
+
+  setTimeout(() => resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+});
+
+function loadHeladeraRecipe(meal) {
+  showPage('page-home');
+  displayMeal({ ...meal, _nutricional: true });
+}
+
+// Init chips on load
+buildChips();
 
 // ─── SERVICE WORKER ──────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
