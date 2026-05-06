@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8502A">
+<title>Sin conexión — ¿Qué cocino hoy?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,800;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --rust: #C8502A; --cream: #FDF6EE; --muted: #7A6E64; --dark: #1E1A16; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .icon { font-size: 5rem; margin-bottom: 1.5rem; }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+  p { color: var(--muted); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; max-width: 360px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--rust);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: #A83E20; }
+
+  .saved-recipes { margin-top: 3rem; max-width: 480px; width: 100%; }
+  .saved-recipes h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--rust);
+  }
+  .recipe-item {
+    background: white;
+    border: 1px solid rgba(30,26,22,0.10);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    display: block;
+    color: var(--dark);
+  }
+  .recipe-item:hover { border-color: var(--rust); }
+  .recipe-item-name { font-weight: 500; font-size: 14px; }
+  .recipe-item-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .empty { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="icon">📵</div>
+  <h1>Sin conexión</h1>
+  <p>Parece que no tenés internet en este momento. Conectate a la red para generar nuevas recetas con inteligencia artificial.</p>
+  <a href="/" class="btn">🔄 Reintentar</a>
+
+  <div class="saved-recipes" id="saved-recipes">
+    <h2>🕐 Recetas que ya viste</h2>
+    <div id="history-offline"></div>
+  </div>
+
+  <script>
+    const history = JSON.parse(localStorage.getItem('history') || '[]');
+    const container = document.getElementById('history-offline');
+    if (history.length === 0) {
+      container.innerHTML = '<p class="empty">No hay recetas guardadas todavía.</p>';
+    } else {
+      history.slice(0, 5).forEach(meal => {
+        const emojis = { milanesa:'🥩', asado:'🥩', empanada:'🥟', pasta:'🍝', guiso:'🍲', pollo:'🍗', default:'🍽' };
+        const n = meal.nombre.toLowerCase();
+        const emoji = Object.keys(emojis).find(k => n.includes(k)) ? emojis[Object.keys(emojis).find(k => n.includes(k))] : '🍽';
+        const div = document.createElement('a');
+        div.href = '/';
+        div.className = 'recipe-item';
+        div.innerHTML = `
+          <div class="recipe-item-name">${emoji} ${meal.nombre}</div>
+          <div class="recipe-item-meta">⏱ ${meal.tiempo} · ${meal.dificultad === 'fácil' ? '⭐ Fácil' : meal.dificultad === 'difícil' ? '⭐⭐⭐ Difícil' : '⭐⭐ Medio'}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
