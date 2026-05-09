@@ -1,12 +1,12 @@
-const CACHE_NAME = 'que-cocino-v1';
+const CACHE_NAME = 'que-cocino-v2';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/manifest.json',
-  '/favicon.ico',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/cocinando/',
+  '/cocinando/index.html',
+  '/cocinando/offline.html',
+  '/cocinando/manifest.json',
+  '/cocinando/favicon.ico',
+  '/cocinando/icons/icon-192.png',
+  '/cocinando/icons/icon-512.png'
 ];
 
 // ─── INSTALL: pre-cache shell ─────────────────────────────────────────
@@ -72,7 +72,7 @@ self.addEventListener('fetch', event => {
           if (cached) return cached;
           // Offline fallback for navigation
           if (request.mode === 'navigate') {
-            return caches.match('/offline.html') || caches.match('/index.html');
+            return caches.match('/cocinando/offline.html') || caches.match('/cocinando/index.html');
           }
         });
       })
@@ -102,6 +102,6 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   event.waitUntil(
-    clients.openWindow(event.notification.data?.url || '/')
+    clients.openWindow(event.notification.data?.url || '/cocinando/')
   );
 });
