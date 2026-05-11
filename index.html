@@ -1113,6 +1113,467 @@ h1 em {
 }
 .no-results .icon { font-size: 3rem; margin-bottom: 0.75rem; }
 .no-results p { font-size: 14px; line-height: 1.6; }
+
+/* ─── COMIDAS ESPECIALES TOGGLE ─────────────────── */
+.mode-toggle.ce-toggle {
+  margin-top: 0.75rem;
+}
+.mode-toggle.ce-toggle.active {
+  border-color: var(--gold);
+  background: rgba(212,168,67,0.10);
+  color: #9A7010;
+}
+.mode-toggle.ce-toggle.active .mode-toggle-pill {
+  background: var(--gold);
+  color: white;
+}
+
+/* ─── COMIDAS ESPECIALES MODULE ─────────────────── */
+#comidas-especiales-module {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    max-height 0.75s cubic-bezier(0.16,1,0.3,1),
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+}
+#comidas-especiales-module.open {
+  max-height: 9999px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@keyframes ceUnlockFlash {
+  0%   { box-shadow: 0 0 0 0 rgba(212,168,67,0); }
+  30%  { box-shadow: 0 0 60px 20px rgba(212,168,67,0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(212,168,67,0); }
+}
+#comidas-especiales-module.unlocking { animation: ceUnlockFlash 0.85s ease-out; }
+
+/* Module header */
+.ce-header {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+}
+.ce-header::before {
+  content: '';
+  display: block;
+  width: 56px; height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--rust));
+  border-radius: 100px;
+  margin: 0 auto 1.5rem;
+}
+.ce-header h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+.ce-header h2 span { color: var(--gold); }
+.ce-header p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+/* Global search + filters */
+.ce-controls {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ce-search-wrap { position: relative; }
+.ce-search {
+  width: 100%;
+  padding: 13px 18px 13px 46px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--paper);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ce-search:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.15); }
+.ce-search::placeholder { color: var(--muted); }
+.ce-search-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 17px; pointer-events: none;
+}
+.ce-filter-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.ce-filter-btn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.ce-filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.ce-filter-btn.active { background: var(--gold); border-color: var(--gold); color: white; }
+
+/* Submodule sections */
+.ce-submodule {
+  padding: 2.5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ce-submodule::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(to right, var(--border), transparent);
+  margin-bottom: 2.5rem;
+}
+.ce-submodule-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+.ce-submodule-flag { font-size: 2.2rem; margin-bottom: 0.35rem; }
+.ce-submodule-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1;
+}
+.ce-submodule-title.theme-mex span { color: #C0392B; }
+.ce-submodule-title.theme-it span  { color: #6B7C3D; }
+.ce-submodule-title.theme-pizza span { color: #E67E22; }
+.ce-submodule-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* Cards grid */
+.ce-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+@media (max-width: 600px) {
+  .ce-cards-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+.ce-recipe-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
+  cursor: pointer;
+  animation: fadeSlideUp 0.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+.ce-recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 44px rgba(30,26,22,0.15);
+}
+.ce-recipe-card.hidden { display: none; }
+
+.ce-card-img {
+  height: 165px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5.5rem;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .ce-card-img { height: 120px; font-size: 3.8rem; }
+}
+.ce-card-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,26,22,0.48) 0%, transparent 55%);
+}
+.ce-card-img.theme-mex   { background: linear-gradient(135deg, #8B0000 0%, #C0392B 40%, #27AE60 100%); }
+.ce-card-img.theme-it    { background: linear-gradient(135deg, #2C5F2E 0%, #6B7C3D 40%, #FAF3E0 100%); }
+.ce-card-img.theme-pizza { background: linear-gradient(135deg, #E67E22 0%, #C0392B 50%, #F39C12 100%); }
+
+.ce-card-badge {
+  position: absolute;
+  top: 9px; right: 9px;
+  z-index: 2;
+  background: rgba(0,0,0,0.42);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.ce-card-emoji { position: relative; z-index: 1; }
+
+.ce-card-body { padding: 1rem 1.1rem 1.1rem; }
+.ce-card-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+.ce-card-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 0.7rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ce-card-pills {
+  display: flex; gap: 5px; flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+.cpill {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.cpill.red    { background: rgba(192,57,43,0.10);  border-color: rgba(192,57,43,0.20);  color: #C0392B; }
+.cpill.gold   { background: rgba(212,168,67,0.14); border-color: rgba(212,168,67,0.24); color: #9A7010; }
+.cpill.orange { background: rgba(230,126,34,0.12); border-color: rgba(230,126,34,0.22); color: #C0622B; }
+
+.ce-card-actions { display: flex; gap: 5px; }
+.ce-card-btn {
+  flex: 1;
+  padding: 7px 8px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+.ce-card-btn:hover { border-color: var(--rust); color: var(--rust); }
+.ce-card-btn.primary { background: var(--rust); border-color: var(--rust); color: white; }
+.ce-card-btn.primary:hover { background: var(--rust-dark); }
+.ce-card-btn.saved { background: rgba(212,168,67,0.14); border-color: var(--gold); color: #9A7010; }
+
+/* Pizza sub-filters */
+.ce-pizza-filters {
+  display: flex; gap: 7px; flex-wrap: wrap;
+  margin-bottom: 1.4rem;
+}
+.ce-pizza-filter-btn {
+  padding: 6px 15px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ce-pizza-filter-btn.active { background: #E67E22; border-color: #E67E22; color: white; }
+.ce-pizza-filter-btn:hover:not(.active) { border-color: #E67E22; color: #E67E22; }
+
+/* No results message */
+.ce-no-results {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--muted);
+  font-size: 14px;
+}
+.ce-no-results .nr-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+
+/* CE Section divider */
+.ce-section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 0 1.5rem;
+}
+
+/* CE Modal overlay */
+.ce-modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(30,26,22,0.65);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.ce-modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+.ce-modal-sheet {
+  width: 100%; max-width: 680px;
+  max-height: 92vh;
+  background: var(--cream);
+  border-radius: 24px 24px 0 0;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  -webkit-overflow-scrolling: touch;
+}
+.ce-modal-overlay.open .ce-modal-sheet { transform: translateY(0); }
+
+.ce-modal-handle {
+  width: 38px; height: 4px;
+  background: var(--border);
+  border-radius: 100px;
+  margin: 12px auto 0;
+}
+.ce-modal-img {
+  height: 230px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 7.5rem;
+  position: relative; overflow: hidden;
+}
+.ce-modal-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,26,22,0.6) 0%, transparent 50%);
+}
+.ce-modal-img.theme-mex   { background: linear-gradient(135deg, #8B0000, #C0392B 50%, #27AE60); }
+.ce-modal-img.theme-it    { background: linear-gradient(135deg, #2C5F2E, #6B7C3D 50%, #FAF3E0); }
+.ce-modal-img.theme-pizza { background: linear-gradient(135deg, #E67E22, #C0392B 50%, #F39C12); }
+
+.ce-modal-img-info {
+  position: absolute; bottom: 1.2rem; left: 1.4rem; right: 1.4rem;
+  color: white; z-index: 2;
+}
+.ce-modal-img-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.85rem; font-weight: 800;
+  line-height: 1.05; margin-bottom: 0.45rem;
+}
+.ce-modal-img-meta { display: flex; gap: 7px; flex-wrap: wrap; }
+.ce-modal-mpill {
+  font-size: 12px; font-weight: 500;
+  padding: 3px 11px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+}
+
+.ce-modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(30,26,22,0.50);
+  border: none; color: white; font-size: 17px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.ce-modal-close:hover { background: rgba(30,26,22,0.80); }
+
+.ce-modal-body { padding: 1.4rem; }
+.ce-modal-section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.7rem;
+}
+.ce-modal-ingredients {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 1.4rem;
+}
+.ce-ing-chip {
+  font-size: 12.5px;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  color: var(--charcoal);
+}
+.ce-modal-steps { list-style: none; margin-bottom: 1.4rem; }
+.ce-modal-steps li {
+  display: flex; gap: 11px;
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  font-size: 13.5px;
+  color: var(--charcoal);
+}
+.ce-nutri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 9px;
+  margin-bottom: 1.4rem;
+}
+.ce-nutri-cell {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 11px;
+  text-align: center;
+}
+.ce-nutri-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--rust);
+}
+.ce-nutri-key { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.ce-modal-actions {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.ce-modal-btn {
+  flex: 1; min-width: 90px;
+  padding: 11px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.ce-modal-btn:hover { border-color: var(--rust); color: var(--rust); }
+.ce-modal-btn.primary {
+  background: var(--rust); border-color: var(--rust); color: white;
+  box-shadow: 0 4px 18px rgba(200,80,42,0.28);
+}
+.ce-modal-btn.primary:hover { background: var(--rust-dark); }
+.ce-modal-btn.saved { background: rgba(212,168,67,0.14); border-color: var(--gold); color: #9A7010; }
+
+/* Shine effect on module heading */
+.ce-premium-shine {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--gold) 0%, #fff8e1 40%, var(--gold) 60%, #E8876A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
 </style>
 </head>
 <body>
@@ -1152,6 +1613,11 @@ h1 em {
         <span class="mode-toggle-pill" id="mode-pill">Desactivado</span>
       </button>
 
+      <button class="mode-toggle ce-toggle" id="btn-ce-toggle">
+        🌍 Comidas especiales
+        <span class="mode-toggle-pill" id="ce-pill">Desactivado</span>
+      </button>
+
       <button class="btn-main" id="btn-generar">
         <span class="emoji">🎲</span>
         ¿Qué cocino hoy?
@@ -1165,6 +1631,107 @@ h1 em {
       </svg>
     </div>
   </section>
+
+  <!-- COMIDAS ESPECIALES MODULE -->
+  <div id="comidas-especiales-module">
+
+    <div class="ce-header">
+      <h2>Comidas <span class="ce-premium-shine">Especiales</span></h2>
+      <p>Explorá lo mejor de la cocina internacional. Recetas premium de México, Italia y el universo de la pizza.</p>
+    </div>
+
+    <div class="ce-controls">
+      <div class="ce-search-wrap">
+        <span class="ce-search-icon">🔍</span>
+        <input type="text" class="ce-search" id="ce-search" placeholder="Buscá una receta... (tacos, lasaña, margherita...)">
+      </div>
+      <div class="ce-filter-row">
+        <button class="ce-filter-btn active" data-filter="all">Todas</button>
+        <button class="ce-filter-btn" data-filter="fácil">⭐ Fácil</button>
+        <button class="ce-filter-btn" data-filter="medio">⭐⭐ Medio</button>
+        <button class="ce-filter-btn" data-filter="difícil">⭐⭐⭐ Difícil</button>
+        <button class="ce-filter-btn" data-filter="rapida">⚡ Rápidas (&lt;30 min)</button>
+        <button class="ce-filter-btn" data-filter="ligera">🥗 Ligeras (&lt;400 kcal)</button>
+        <button class="ce-filter-btn" data-filter="picante">🌶️ Picantes</button>
+      </div>
+    </div>
+
+    <!-- SUBMODULE 1: AMIGOS MEXICANOS -->
+    <section class="ce-submodule" id="ce-sub-mex">
+      <div class="ce-submodule-header">
+        <div>
+          <div class="ce-submodule-flag">🇲🇽</div>
+          <div class="ce-submodule-title theme-mex">Amigos <span>Mexicanos</span></div>
+          <div class="ce-submodule-subtitle">Sabores intensos, colores vibrantes, tradición auténtica</div>
+        </div>
+      </div>
+      <div class="ce-cards-grid" id="ce-mex-grid"></div>
+      <div class="ce-no-results" id="ce-mex-empty" style="display:none">
+        <div class="nr-icon">🌮</div>
+        <p>No hay recetas que coincidan con los filtros.</p>
+      </div>
+    </section>
+
+    <div class="ce-section-divider"></div>
+
+    <!-- SUBMODULE 2: AMIGOS ITALIANOS -->
+    <section class="ce-submodule" id="ce-sub-it">
+      <div class="ce-submodule-header">
+        <div>
+          <div class="ce-submodule-flag">🇮🇹</div>
+          <div class="ce-submodule-title theme-it">Amigos <span>Italianos</span></div>
+          <div class="ce-submodule-subtitle">La cucina italiana en toda su elegancia y tradición</div>
+        </div>
+      </div>
+      <div class="ce-cards-grid" id="ce-it-grid"></div>
+      <div class="ce-no-results" id="ce-it-empty" style="display:none">
+        <div class="nr-icon">🍝</div>
+        <p>No hay recetas que coincidan con los filtros.</p>
+      </div>
+    </section>
+
+    <div class="ce-section-divider"></div>
+
+    <!-- SUBMODULE 3: AMIGOS DE LA PIZZA -->
+    <section class="ce-submodule" id="ce-sub-pizza">
+      <div class="ce-submodule-header">
+        <div>
+          <div class="ce-submodule-flag">🍕</div>
+          <div class="ce-submodule-title theme-pizza">Amigos de la <span>Pizza</span></div>
+          <div class="ce-submodule-subtitle">Desde la clásica napolitana hasta las versiones gourmet más creativas</div>
+        </div>
+      </div>
+      <div class="ce-pizza-filters">
+        <button class="ce-pizza-filter-btn active" data-pfilter="all">Todas</button>
+        <button class="ce-pizza-filter-btn" data-pfilter="clasica">🍕 Clásicas</button>
+        <button class="ce-pizza-filter-btn" data-pfilter="gourmet">✨ Gourmet</button>
+        <button class="ce-pizza-filter-btn" data-pfilter="veggie">🥬 Vegetarianas</button>
+        <button class="ce-pizza-filter-btn" data-pfilter="picante">🌶️ Picantes</button>
+      </div>
+      <div class="ce-cards-grid" id="ce-pizza-grid"></div>
+      <div class="ce-no-results" id="ce-pizza-empty" style="display:none">
+        <div class="nr-icon">🍕</div>
+        <p>No hay pizzas que coincidan con los filtros.</p>
+      </div>
+    </section>
+
+  </div><!-- /comidas-especiales-module -->
+
+  <!-- CE MODAL -->
+  <div class="ce-modal-overlay" id="ce-modal-overlay" onclick="ceCloseModal(event)">
+    <div class="ce-modal-sheet" id="ce-modal-sheet">
+      <div class="ce-modal-handle"></div>
+      <div class="ce-modal-img" id="ce-modal-img">
+        <button class="ce-modal-close" onclick="ceCloseModalForce()">✕</button>
+        <div id="ce-modal-emoji" style="position:relative;z-index:1;font-size:7rem"></div>
+        <div class="ce-modal-img-info">
+          <div class="ce-modal-img-name" id="ce-modal-name"></div>
+          <div class="ce-modal-img-meta" id="ce-modal-meta"></div>
+        </div>
+      </div>
+      <div class="ce-modal-body" id="ce-modal-body"></div>
+    </div>
+  </div>
 
   <!-- RESULT -->
   <section id="result-section">
@@ -1894,6 +2461,260 @@ function loadHeladeraRecipe(meal) {
 
 // Init chips on load
 buildChips();
+
+// ─── COMIDAS ESPECIALES ──────────────────────────────────────────────────
+const CE_MEX_RECIPES = [
+  { id:'mex1', emoji:'🌮', nombre:'Tacos al Pastor', categoria:'mex', desc:'Jugoso cerdo marinado en achiote y piña asada, servido en tortilla con cebolla, cilantro y salsa verde.', dificultad:'medio', tiempo:'40 min', minutos:40, calorias:450, picante:true, ingredientes:['400g lomo de cerdo','1 piña','Chile guajillo','Achiote','Cebolla','Cilantro','Tortillas de maíz','Limón','Salsa verde'], pasos:['Marinar el cerdo con chile guajillo remojado, achiote, vinagre, ajo y sal por 2 horas.','Asar la carne en sartén caliente o al horno hasta dorar bien.','Calentar tortillas en comal seco.','Servir la carne sobre las tortillas con cebolla picada, cilantro, trozos de piña y salsa verde.','Exprimir limón al gusto.'], tags:['clasica'] },
+  { id:'mex2', emoji:'🌯', nombre:'Burritos de Frijoles', categoria:'mex', desc:'Tortilla grande rellena de frijoles refritos, arroz, cheddar derretido, crema y pico de gallo.', dificultad:'fácil', tiempo:'25 min', minutos:25, calorias:620, picante:false, ingredientes:['Tortillas de harina grande','Frijoles refritos','Arroz rojo','Queso cheddar','Crema','Pico de gallo','Lechuga','Aguacate'], pasos:['Calentar los frijoles refritos y el arroz.','Calentar la tortilla 30 seg por lado en sartén.','Distribuir todos los ingredientes en el centro.','Doblar los extremos y enrollar firmemente.','Tostar en sartén 1 minuto por lado.'], tags:['clasica','rapida'] },
+  { id:'mex3', emoji:'🧀', nombre:'Quesadillas con Guacamole', categoria:'mex', desc:'Tortilla crujiente rellena de queso Oaxaca derretido con hongos y rajas, servida con guacamole casero.', dificultad:'fácil', tiempo:'20 min', minutos:20, calorias:390, picante:false, ingredientes:['Tortillas de maíz','Queso Oaxaca','Hongos portobello','Rajas de chile poblano','Aguacate','Limón','Cilantro','Sal','Ajo'], pasos:['Saltear hongos y rajas con ajo.','Poner queso sobre una tortilla, agregar el relleno y doblar.','Cocinar en sartén sin aceite hasta que el queso derrita.','Preparar guacamole: machacar aguacate con limón, cilantro y sal.','Servir con guacamole al costado.'], tags:['rapida','veggie'] },
+  { id:'mex4', emoji:'🌽', nombre:'Nachos Supremos', categoria:'mex', desc:'Chips de maíz horneados cubiertos con tres quesos, jalapeños, guacamole y crema agria.', dificultad:'fácil', tiempo:'15 min', minutos:15, calorias:580, picante:true, ingredientes:['Chips de maíz','Queso cheddar','Queso mozzarella','Jalapeños en escabeche','Guacamole','Crema agria','Pico de gallo','Frijoles negros'], pasos:['Precalentar horno a 200°C.','Distribuir chips en asadera. Cubrir con quesos rallados.','Hornear 8 minutos hasta que el queso burbujee.','Agregar jalapeños, guacamole, crema y pico de gallo.','Servir inmediatamente.'], tags:['rapida','picante'] },
+  { id:'mex5', emoji:'🌶️', nombre:'Enchiladas Verdes', categoria:'mex', desc:'Tortillas bañadas en salsa verde de tomatillo con pollo desmechado, cubiertas de crema y queso fresco.', dificultad:'medio', tiempo:'50 min', minutos:50, calorias:480, picante:true, ingredientes:['8 tortillas de maíz','2 pechugas de pollo','500g tomatillos','Chiles serranos','Cebolla','Ajo','Crema','Queso fresco','Aceite'], pasos:['Cocer el pollo en agua con sal, desmechar.','Asar tomatillos, chiles, cebolla y ajo. Licuar la salsa verde.','Sazonar la salsa en cazuela con aceite hasta que oscurezca.','Pasar tortillas por la salsa, rellenar con pollo y enrollar.','Bañar con el resto de la salsa, crema y queso desmoronado.'], tags:['picante'] },
+  { id:'mex6', emoji:'🫙', nombre:'Chili con Carne', categoria:'mex', desc:'Guiso robusto de carne molida con tres tipos de chiles, frijoles negros y especias que cocinan lento.', dificultad:'medio', tiempo:'60 min', minutos:60, calorias:520, picante:true, ingredientes:['500g carne molida','Frijoles negros cocidos','Tomates en lata','Chile ancho','Chile chipotle','Cebolla','Ajo','Comino','Orégano','Pimentón ahumado'], pasos:['Dorar carne molida con cebolla y ajo.','Agregar chiles hidratados y licuados, tomates, frijoles y especias.','Cocinar a fuego lento 40 minutos revolviendo ocasionalmente.','Ajustar sazón con sal, comino y chile.','Servir con arroz, crema y queso.'], tags:['picante'] },
+  { id:'mex7', emoji:'🥑', nombre:'Guacamole Clásico', categoria:'mex', desc:'La receta auténtica: aguacate Hass maduro con tomate, cebolla, jalapeño, cilantro y limón recién exprimido.', dificultad:'fácil', tiempo:'10 min', minutos:10, calorias:180, picante:false, ingredientes:['3 aguacates Hass maduros','1 tomate','½ cebolla blanca','1 jalapeño','Cilantro fresco','2 limones','Sal gruesa'], pasos:['Cortar aguacates por la mitad, retirar hueso.','Machacar la pulpa con tenedor dejando textura rústica.','Picar finamente tomate, cebolla, jalapeño y cilantro.','Incorporar los picados y jugo de limón.','Sazonar con sal y servir de inmediato con chips.'], tags:['rapida','veggie','ligera'] },
+  { id:'mex8', emoji:'🥘', nombre:'Pozole Rojo', categoria:'mex', desc:'Caldo profundo con maíz cacahuazintle y cerdo deshebrado, cubierto de repollo, rábano y orégano.', dificultad:'difícil', tiempo:'120 min', minutos:120, calorias:390, picante:false, ingredientes:['Maíz cacahuazintle precocido','600g cerdo','Chiles guajillo y ancho','Ajo','Orégano','Repollo','Rábano','Cebolla','Tostadas'], pasos:['Cocer el cerdo en agua con ajo y sal 1 hora. Deshebrarlo.','Asar y remojar los chiles. Licuar con ajo y caldo.','Colar la salsa roja en el caldo, agregar el maíz y la carne.','Hervir 30 minutos más a fuego lento.','Servir con repollo, rábano, orégano y tostadas.'], tags:[] }
+];
+
+const CE_IT_RECIPES = [
+  { id:'it1', emoji:'🍝', nombre:'Spaghetti Carbonara', categoria:'it', desc:'La receta original romana: pasta al dente con guanciale crujiente, huevo entero, Pecorino Romano y pimienta negra.', dificultad:'medio', tiempo:'25 min', minutos:25, calorias:540, picante:false, ingredientes:['400g spaghetti','150g guanciale','4 yemas de huevo','1 huevo entero','80g Pecorino Romano','Pimienta negra recién molida','Sal gruesa'], pasos:['Cocinar pasta en agua muy salada hasta al dente.','Cortar guanciale en tiras, dorar en sartén seca hasta crujir.','Mezclar yemas, huevo entero, Pecorino y pimienta en bowl.','Retirar pasta del agua, reservar ½ taza de agua de cocción.','Mezclar pasta con guanciale, retirar del fuego, agregar la mezcla de huevos y agua de cocción. Emulsionar rápidamente.'], tags:[] },
+  { id:'it2', emoji:'🥟', nombre:'Ravioles de Ricotta', categoria:'it', desc:'Pasta fresca rellena con ricotta, espinaca y nuez moscada, bañada en mantequilla con salvia.', dificultad:'difícil', tiempo:'80 min', minutos:80, calorias:490, picante:false, ingredientes:['300g harina 00','3 huevos','250g ricotta','200g espinaca','Nuez moscada','80g mantequilla','Hojas de salvia','Parmesano','Sal'], pasos:['Preparar la pasta: mezclar harina y huevos, amasar 10 minutos, reposar 30 min cubierta.','Cocinar espinaca, escurrir bien, picar. Mezclar con ricotta, nuez moscada y sal.','Estirar la pasta fina, colocar pequeños montones de relleno, cubrir y cortar ravioles.','Cocer en agua salada 3-4 minutos hasta que floten.','Saltear en mantequilla con salvia dorada. Servir con Parmesano.'], tags:['veggie'] },
+  { id:'it3', emoji:'🍲', nombre:'Ñoquis al Pesto', categoria:'it', desc:'Suaves ñoquis de papa con pesto genovese de albahaca fresca, piñones y Parmesano.', dificultad:'medio', tiempo:'55 min', minutos:55, calorias:420, picante:false, ingredientes:['1kg papas','250g harina','1 huevo','Sal','2 tazas albahaca','Piñones','Ajo','Aceite de oliva extra virgen','Parmesano','Pecorino'], pasos:['Hervir papas con cáscara. Pelar y pisarlas calientes.','Incorporar harina, huevo y sal. Amasar hasta formar masa no pegajosa.','Formar cilindros, cortar y marcar con tenedor.','Procesar albahaca, piñones, ajo, quesos y aceite hasta obtener pesto suave.','Cocer ñoquis: están listos cuando flotan (2-3 min). Mezclar con pesto.'], tags:['veggie'] },
+  { id:'it4', emoji:'🫕', nombre:'Lasaña Boloñesa', categoria:'it', desc:'Capas perfectas de pasta fresca, ragú de carne lento, bechamel cremosa y Parmesano abundante.', dificultad:'difícil', tiempo:'150 min', minutos:150, calorias:680, picante:false, ingredientes:['Placas de lasaña','500g carne vacuna molida','200g panceta','Tomates San Marzano','Zanahoria','Apio','Cebolla','Vino tinto','Leche','Mantequilla','Harina','Parmesano'], pasos:['Preparar ragú: dorar carne con panceta, verduras picadas. Agregar vino, dejar evaporar. Agregar tomates y cocinar 2 horas.','Hacer bechamel: derretir mantequilla, agregar harina, incorporar leche caliente batiendo. Salpimentar.','Cocer placas de lasaña al dente.','Montar en fuente: capa de bechamel, pasta, ragú, Parmesano. Repetir 4 capas.','Hornear a 180°C cubierto 30 min, descubrir 15 min más.'], tags:[] },
+  { id:'it5', emoji:'🫓', nombre:'Focaccia Genovesa', categoria:'it', desc:'Pan plano esponjoso de Génova con aceite de oliva, sal en escamas, romero y aceitunas.', dificultad:'medio', tiempo:'90 min', minutos:90, calorias:320, picante:false, ingredientes:['500g harina de fuerza','10g levadura seca','350ml agua tibia','80ml aceite de oliva','10g sal','Romero fresco','Aceitunas verdes','Sal en escamas'], pasos:['Disolver levadura en agua. Mezclar con harina y sal. Amasar 10 min.','Incorporar 40ml aceite. Amasar hasta masa suave. Reposar 1 hora tapada.','Volcar en asadera aceitada, estirar con los dedos haciendo hoyuelos.','Regar con resto de aceite, cubrir con romero y aceitunas. Reposar 20 min.','Hornear a 230°C unos 20 minutos hasta dorada. Espolvorear sal en escamas.'], tags:['veggie'] },
+  { id:'it6', emoji:'🍚', nombre:'Risotto ai Funghi', categoria:'it', desc:'Arroz Arborio cremoso con hongos porcini secos, vino blanco seco y mantequilla montada.', dificultad:'medio', tiempo:'40 min', minutos:40, calorias:430, picante:false, ingredientes:['320g arroz Arborio','30g hongos porcini secos','1 cebolla','100ml vino blanco seco','Caldo de verduras caliente','60g mantequilla','Parmesano','Aceite de oliva','Sal y pimienta'], pasos:['Remojar porcini en agua caliente 30 min. Reservar el líquido.','Sofreír cebolla en mantequilla y aceite. Agregar arroz y tostar 2 min.','Añadir vino, revolver. Incorporar el líquido de los hongos colado.','Ir agregando caldo caliente cucharón a cucharón, revolviendo constantemente.','Al dente (18 min), retirar del fuego y "mantecare" con mantequilla fría y Parmesano.'], tags:['veggie'] },
+  { id:'it7', emoji:'☕', nombre:'Tiramisú Clásico', categoria:'it', desc:'El postre italiano por excelencia: capas de savoiardi en espresso, crema de mascarpone y cacao amargo.', dificultad:'medio', tiempo:'30 min', minutos:30, calorias:380, picante:false, ingredientes:['500g mascarpone','4 huevos','100g azúcar','300ml café espresso frío','200g savoiardi','Cacao amargo en polvo','Amaretto (opcional)'], pasos:['Separar claras de yemas. Batir yemas con azúcar hasta blanquear.','Incorporar mascarpone hasta crema suave.','Batir claras a nieve e incorporar envolvente.','Mojar savoiardi rápidamente en el café (y amaretto). Cubrir el molde.','Cubrir con crema de mascarpone. Repetir capas. Refrigerar mínimo 4 horas. Espolvorear cacao antes de servir.'], tags:['veggie'] },
+  { id:'it8', emoji:'🍋', nombre:'Pasta al Limone', categoria:'it', desc:'Linguine con salsa cremosa de limón de Amalfi, Parmesano y albahaca. Simple, elegante, refrescante.', dificultad:'fácil', tiempo:'20 min', minutos:20, calorias:360, picante:false, ingredientes:['400g linguine','2 limones (ralladura y jugo)','200ml crema de leche','80g Parmesano','Mantequilla','Albahaca','Sal y pimienta'], pasos:['Cocer linguine en agua salada hasta al dente. Reservar agua de cocción.','Calentar crema en sartén, agregar ralladura y jugo de limón.','Escurrir pasta y agregar a la sartén con un poco de agua de cocción.','Incorporar Parmesano y mantequilla, emulsionar bien.','Servir inmediatamente con hojas de albahaca y más ralladura.'], tags:['rapida','veggie','ligera'] }
+];
+
+const CE_PIZZA_RECIPES = [
+  { id:'piz1', emoji:'🍕', nombre:'Napolitana Auténtica', categoria:'pizza', desc:'La pizza DOP: masa de 48hs de fermentación, tomate San Marzano, búfala fresca y albahaca. Horneada a 450°C.', dificultad:'difícil', tiempo:'48 hrs', minutos:2880, calorias:520, picante:false, tipoPizza:'Napolitana', masaTipo:'Masa madre 48hs', ingredientes:['Harina 00','Agua','Sal marina','Levadura natural','Tomate San Marzano','Mozzarella de búfala','Albahaca fresca','Aceite de oliva extra virgen'], pasos:['Mezclar harina, agua (65% hidratación), sal y levadura. Amasar 20 min.','Fermentar 24 horas en frío. Bollar y fermentar 24 horas más.','Estirar a mano (no con palo) formando borde grueso.','Cubrir con tomate aplastado, sal y aceite.','Hornear en horno muy caliente (450°C) 90 segundos. Agregar búfala y albahaca al salir.'], tags:['clasica','veggie'] },
+  { id:'piz2', emoji:'🧆', nombre:'Margherita Perfecta', categoria:'pizza', desc:'Tomate, mozzarella fior di latte y albahaca. La pizza más sencilla y más perfecta del mundo.', dificultad:'medio', tiempo:'35 min', minutos:35, calorias:480, picante:false, tipoPizza:'Italiana Clásica', masaTipo:'Levadura de cerveza', ingredientes:['Masa de pizza','Salsa de tomate','Mozzarella fior di latte','Albahaca fresca','Sal','Aceite de oliva'], pasos:['Estirar la masa en círculo de 30cm.','Distribuir salsa de tomate dejando 2cm de borde.','Agregar mozzarella cortada o desgarrada.','Hornear a 250°C sobre piedra refractaria 8-10 minutos.','Agregar albahaca fresca y un hilo de aceite al retirar del horno.'], tags:['clasica','veggie'] },
+  { id:'piz3', emoji:'🧅', nombre:'Fugazzeta Rellena', categoria:'pizza', desc:'El clásico argentino: dos capas de masa rellenas con abundante mozzarella y cubiertas de cebolla caramelizada.', dificultad:'medio', tiempo:'50 min', minutos:50, calorias:640, picante:false, tipoPizza:'Argentina', masaTipo:'Masa alta esponjosa', ingredientes:['600g masa para pizza alta','600g mozzarella','4 cebollas grandes','Aceite de oliva','Orégano','Sal','Aceitunas verdes'], pasos:['Estirar ⅔ de la masa en molde aceitado (alta, tipo fainá).','Cubrir con mozzarella en abundancia.','Colocar la masa restante encima, sellar los bordes bien.','Cubrir con cebolla en rodajas finas, aceitunas y aceite.','Hornear a 220°C unos 25-30 minutos hasta dorada y bien cocida.'], tags:['clasica','veggie'] },
+  { id:'piz4', emoji:'🌶️', nombre:'Pepperoni Picante', categoria:'pizza', desc:'Salsa de tomate robusta con doble capa de pepperoni ahumado que se curva en copitas al hornearse.', dificultad:'fácil', tiempo:'30 min', minutos:30, calorias:580, picante:true, tipoPizza:'Americana', masaTipo:'Masa fina crujiente', ingredientes:['Masa de pizza','Salsa de tomate especiada','Mozzarella','Pepperoni','Orégano','Ají molido','Parmesano'], pasos:['Estirar masa fina. Cubrir con salsa dejando borde.','Primera capa de mozzarella rallada.','Distribuir generosamente pepperoni (se encogerá).','Agregar más mozzarella y Parmesano sobre el pepperoni.','Hornear a 250°C en la rejilla baja 12 minutos.'], tags:['clasica','picante'] },
+  { id:'piz5', emoji:'🧀', nombre:'Cuatro Quesos', categoria:'pizza', desc:'Sinfonía de sabores: mozzarella, gorgonzola, Parmesano y fontina sobre base de crema de ajo.', dificultad:'fácil', tiempo:'28 min', minutos:28, calorias:620, picante:false, tipoPizza:'Italiana Gourmet', masaTipo:'Masa fina', ingredientes:['Masa de pizza','Mozzarella','Gorgonzola','Parmesano','Fontina (o gruyere)','Crema de ajo','Nuez moscada','Pimienta negra'], pasos:['Untar la masa con crema de ajo en lugar de tomate.','Distribuir los cuatro quesos en sectores o mezclados.','Rallar nuez moscada y agregar pimienta negra.','Hornear a 240°C unos 10-12 minutos.','Servir con miel de trufa opcional para versión gourmet.'], tags:['gourmet','veggie'] },
+  { id:'piz6', emoji:'🥩', nombre:'BBQ Pulled Pork', categoria:'pizza', desc:'Base de salsa BBQ ahumada con cerdo desmechado al horno lento, cebolla morada encurtida y cilantro.', dificultad:'difícil', tiempo:'180 min', minutos:180, calorias:660, picante:false, tipoPizza:'Gourmet Americana', masaTipo:'Masa crujiente', ingredientes:['Masa de pizza','Salsa BBQ ahumada','400g cerdo desmechado (slow cooker)','Cebolla morada','Mozzarella ahumada','Cilantro','Jalapeños encurtidos'], pasos:['Cocinar el cerdo en slow cooker o horno bajo con especias BBQ 4-5 horas hasta deshebrarlo.','Estirar masa, cubrir con salsa BBQ.','Agregar mozzarella ahumada y el cerdo desmechado.','Hornear a 230°C unos 12 minutos.','Terminar con cebolla morada, jalapeños y cilantro fresco.'], tags:['gourmet','picante'] },
+  { id:'piz7', emoji:'🥦', nombre:'Pizza Veggie Gourmet', categoria:'pizza', desc:'Masa integral con hummus de base, vegetales asados (zucchini, pimiento, berenjena), feta y pesto.', dificultad:'medio', tiempo:'45 min', minutos:45, calorias:380, picante:false, tipoPizza:'Gourmet Vegetariana', masaTipo:'Masa integral', ingredientes:['Masa integral de pizza','Hummus','Zucchini','Pimiento rojo','Berenjena','Queso feta','Pesto de albahaca','Rúcula','Aceite de oliva'], pasos:['Asar vegetales con aceite, sal y hierbas a 200°C 20 minutos.','Estirar masa integral. Untar con hummus.','Distribuir vegetales asados sobre el hummus.','Desgranar feta encima.','Hornear a 220°C unos 15 minutos. Terminar con rúcula y pesto al servir.'], tags:['gourmet','veggie'] },
+  { id:'piz8', emoji:'🌿', nombre:'Calabresa con Aceitunas', categoria:'pizza', desc:'Salsa de tomate especiada con longaniza calabresa picante, aceitunas negras y orégano abundante.', dificultad:'fácil', tiempo:'30 min', minutos:30, calorias:540, picante:true, tipoPizza:'Brasileño-Argentina', masaTipo:'Masa media', ingredientes:['Masa de pizza','Salsa de tomate','Longaniza calabresa','Aceitunas negras','Mozzarella','Orégano','Aceite de oliva','Ají molido'], pasos:['Estirar masa y cubrir con salsa de tomate bien condimentada.','Agregar mozzarella rallada uniformemente.','Distribuir rodajas de calabresa y aceitunas.','Espolvorear orégano abundante y ají molido.','Hornear a 240°C unos 12 minutos. Regar con aceite de oliva al retirar.'], tags:['clasica','picante'] }
+];
+
+const CE_ALL = [...CE_MEX_RECIPES, ...CE_IT_RECIPES, ...CE_PIZZA_RECIPES];
+
+// CE State
+let ceActive = false;
+let ceGridsBuilt = false;
+let ceCurrFilter = 'all';
+let ceCurrPizzaFilter = 'all';
+
+// Toggle button
+const btnCeToggle = document.getElementById('btn-ce-toggle');
+const cePill = document.getElementById('ce-pill');
+
+btnCeToggle.addEventListener('click', () => {
+  ceActive = !ceActive;
+  btnCeToggle.classList.toggle('active', ceActive);
+  cePill.textContent = ceActive ? '✅ Activado' : 'Desactivado';
+
+  const mod = document.getElementById('comidas-especiales-module');
+  if (ceActive) {
+    if (!ceGridsBuilt) { ceBuildGrids(); ceGridsBuilt = true; }
+    mod.classList.add('open');
+    mod.classList.add('unlocking');
+    setTimeout(() => mod.classList.remove('unlocking'), 900);
+    showToast('🌍 Comidas especiales activadas ✨');
+    setTimeout(() => mod.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+  } else {
+    mod.classList.remove('open');
+    showToast('🎲 Comidas especiales desactivadas');
+  }
+});
+
+// Build grids
+function ceDiffBadge(d) {
+  return d === 'fácil' ? '⭐ Fácil' : d === 'difícil' ? '⭐⭐⭐ Difícil' : '⭐⭐ Medio';
+}
+
+function ceCeSaved(id) {
+  try { return JSON.parse(localStorage.getItem('ce_saved') || '[]').includes(id); } catch { return false; }
+}
+
+function ceToggleSave(id) {
+  let s; try { s = JSON.parse(localStorage.getItem('ce_saved') || '[]'); } catch { s = []; }
+  if (s.includes(id)) s = s.filter(x => x !== id); else s.push(id);
+  localStorage.setItem('ce_saved', JSON.stringify(s));
+  const saved = s.includes(id);
+  const cardBtn = document.getElementById('ce-save-' + id);
+  const modalBtn = document.getElementById('ce-modal-save-' + id);
+  if (cardBtn) { cardBtn.textContent = saved ? '❤️ Guardado' : '🤍 Guardar'; cardBtn.className = 'ce-card-btn' + (saved ? ' saved' : ''); }
+  if (modalBtn) { modalBtn.textContent = saved ? '❤️ Guardado' : '🤍 Guardar'; modalBtn.className = 'ce-modal-btn' + (saved ? ' saved' : ''); }
+}
+
+function ceShareRecipe(id) {
+  const r = CE_ALL.find(x => x.id === id);
+  if (!r) return;
+  const text = `¡Mirá esta receta! ${r.emoji} ${r.nombre} — ${r.desc} | ⏱ ${r.tiempo} | 🔥 ${r.calorias} kcal`;
+  if (navigator.share) navigator.share({ title: r.nombre, text, url: window.location.href }).catch(() => {});
+  else navigator.clipboard.writeText(text).then(() => showToast('📋 Receta copiada')).catch(() => {});
+}
+
+function ceRenderCard(r, themeClass) {
+  const saved = ceCeSaved(r.id);
+  return `
+    <div class="ce-recipe-card" id="ce-card-${r.id}" data-dif="${r.dificultad}" data-min="${r.minutos}" data-cal="${r.calorias}" data-picante="${r.picante}" data-ptag="${(r.tags||[]).join(' ')}" onclick="ceOpenModal('${r.id}')">
+      <div class="ce-card-img ${themeClass}">
+        <div class="ce-card-badge">${ceDiffBadge(r.dificultad)}</div>
+        <div class="ce-card-emoji">${r.emoji}</div>
+      </div>
+      <div class="ce-card-body">
+        <div class="ce-card-name">${r.nombre}</div>
+        <div class="ce-card-desc">${r.desc}</div>
+        <div class="ce-card-pills">
+          <span class="cpill">⏱ ${r.tiempo}</span>
+          <span class="cpill gold">🔥 ${r.calorias} kcal</span>
+          ${r.picante ? '<span class="cpill red">🌶️ Picante</span>' : ''}
+          ${r.tipoPizza ? '<span class="cpill orange">' + r.tipoPizza + '</span>' : ''}
+        </div>
+        <div class="ce-card-actions">
+          <button class="ce-card-btn primary" onclick="event.stopPropagation();ceOpenModal('${r.id}')">👁 Ver</button>
+          <button class="ce-card-btn ${saved ? 'saved' : ''}" id="ce-save-${r.id}" onclick="event.stopPropagation();ceToggleSave('${r.id}')">
+            ${saved ? '❤️ Guardado' : '🤍 Guardar'}
+          </button>
+          <button class="ce-card-btn" onclick="event.stopPropagation();ceShareRecipe('${r.id}')">↗ Compartir</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function ceBuildGrids() {
+  document.getElementById('ce-mex-grid').innerHTML   = CE_MEX_RECIPES.map(r => ceRenderCard(r, 'theme-mex')).join('');
+  document.getElementById('ce-it-grid').innerHTML    = CE_IT_RECIPES.map(r => ceRenderCard(r, 'theme-it')).join('');
+  document.getElementById('ce-pizza-grid').innerHTML = CE_PIZZA_RECIPES.map(r => ceRenderCard(r, 'theme-pizza')).join('');
+}
+
+// Modal
+function ceOpenModal(id) {
+  const r = CE_ALL.find(x => x.id === id);
+  if (!r) return;
+  const themeMap = { mex:'theme-mex', it:'theme-it', pizza:'theme-pizza' };
+  document.getElementById('ce-modal-img').className = 'ce-modal-img ' + (themeMap[r.categoria] || '');
+  document.getElementById('ce-modal-emoji').textContent = r.emoji;
+  document.getElementById('ce-modal-name').textContent = r.nombre;
+
+  const meta = [
+    `⏱ ${r.tiempo}`,
+    ceDiffBadge(r.dificultad),
+    `🔥 ${r.calorias} kcal`,
+    ...(r.picante ? ['🌶️ Picante'] : []),
+    ...(r.tipoPizza ? ['🍕 ' + r.tipoPizza] : [])
+  ];
+  document.getElementById('ce-modal-meta').innerHTML = meta.map(m => `<span class="ce-modal-mpill">${m}</span>`).join('');
+
+  const saved = ceCeSaved(r.id);
+  document.getElementById('ce-modal-body').innerHTML = `
+    <div class="ce-modal-section-title">🥘 Ingredientes</div>
+    <div class="ce-modal-ingredients">${r.ingredientes.map(i => `<span class="ce-ing-chip">${i}</span>`).join('')}</div>
+    ${r.masaTipo ? `<div class="ce-modal-section-title">🍞 Tipo de masa</div><p style="font-size:14px;color:var(--muted);margin-bottom:1.2rem">${r.masaTipo}</p>` : ''}
+    <div class="ce-modal-section-title">👨‍🍳 Preparación</div>
+    <ol class="ce-modal-steps">
+      ${r.pasos.map((p,i) => `<li><div class="step-num">${i+1}</div><div>${p}</div></li>`).join('')}
+    </ol>
+    <div class="ce-modal-section-title">📊 Info Nutricional Aproximada</div>
+    <div class="ce-nutri-grid">
+      <div class="ce-nutri-cell"><div class="ce-nutri-val">${r.calorias}</div><div class="ce-nutri-key">Calorías</div></div>
+      <div class="ce-nutri-cell"><div class="ce-nutri-val">${Math.round(r.calorias*0.12)}g</div><div class="ce-nutri-key">Proteínas</div></div>
+      <div class="ce-nutri-cell"><div class="ce-nutri-val">${Math.round(r.calorias*0.10)}g</div><div class="ce-nutri-key">Grasas</div></div>
+      <div class="ce-nutri-cell"><div class="ce-nutri-val">${Math.round(r.calorias*0.14)}g</div><div class="ce-nutri-key">Carbos</div></div>
+    </div>
+    <div class="ce-modal-actions">
+      <button class="ce-modal-btn primary" onclick="ceCloseModalForce()">✓ Cerrar</button>
+      <button class="ce-modal-btn ${saved ? 'saved' : ''}" id="ce-modal-save-${r.id}" onclick="ceToggleSave('${r.id}')">
+        ${saved ? '❤️ Guardado' : '🤍 Guardar'}
+      </button>
+      <button class="ce-modal-btn" onclick="ceShareRecipe('${r.id}')">↗ Compartir</button>
+    </div>
+  `;
+
+  document.getElementById('ce-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function ceCloseModal(e) {
+  if (e.target === document.getElementById('ce-modal-overlay')) ceCloseModalForce();
+}
+function ceCloseModalForce() {
+  document.getElementById('ce-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Global search + filters
+document.querySelectorAll('.ce-filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.ce-filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    ceCurrFilter = this.dataset.filter;
+    ceApplyFilters();
+  });
+});
+
+document.getElementById('ce-search').addEventListener('input', ceApplyFilters);
+
+function ceApplyFilters() {
+  if (!ceGridsBuilt) return;
+  const query = document.getElementById('ce-search').value.toLowerCase().trim();
+  const f = ceCurrFilter;
+  document.querySelectorAll('.ce-recipe-card').forEach(card => {
+    const id = card.id.replace('ce-card-', '');
+    const r = CE_ALL.find(x => x.id === id);
+    if (!r) return;
+    const matchSearch = !query ||
+      r.nombre.toLowerCase().includes(query) ||
+      r.desc.toLowerCase().includes(query) ||
+      r.ingredientes.some(i => i.toLowerCase().includes(query));
+    let matchFilter = true;
+    if (f === 'fácil')   matchFilter = r.dificultad === 'fácil';
+    else if (f === 'medio')   matchFilter = r.dificultad === 'medio';
+    else if (f === 'difícil') matchFilter = r.dificultad === 'difícil';
+    else if (f === 'rapida')  matchFilter = r.minutos <= 30;
+    else if (f === 'ligera')  matchFilter = r.calorias < 400;
+    else if (f === 'picante') matchFilter = r.picante === true;
+    card.classList.toggle('hidden', !(matchSearch && matchFilter));
+  });
+  ['mex','it','pizza'].forEach(prefix => {
+    const grid  = document.getElementById('ce-' + prefix + '-grid');
+    const empty = document.getElementById('ce-' + prefix + '-empty');
+    if (!grid || !empty) return;
+    const anyVisible = [...grid.querySelectorAll('.ce-recipe-card')].some(c => !c.classList.contains('hidden'));
+    empty.style.display = anyVisible ? 'none' : 'block';
+  });
+}
+
+// Pizza category filters
+document.querySelectorAll('.ce-pizza-filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.ce-pizza-filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    ceCurrPizzaFilter = this.dataset.pfilter;
+    ceApplyPizzaFilter();
+  });
+});
+
+function ceApplyPizzaFilter() {
+  if (!ceGridsBuilt) return;
+  const f = ceCurrPizzaFilter;
+  const pizzaCards = document.querySelectorAll('#ce-pizza-grid .ce-recipe-card');
+  pizzaCards.forEach(card => {
+    const id = card.id.replace('ce-card-', '');
+    const r = CE_ALL.find(x => x.id === id);
+    if (!r) return;
+    let match = f === 'all' || (r.tags || []).includes(f);
+    card.classList.toggle('hidden', !match);
+  });
+  const grid  = document.getElementById('ce-pizza-grid');
+  const empty = document.getElementById('ce-pizza-empty');
+  const anyVisible = [...grid.querySelectorAll('.ce-recipe-card')].some(c => !c.classList.contains('hidden'));
+  empty.style.display = anyVisible ? 'none' : 'block';
+}
+
+// ESC closes CE modal too
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ceCloseModalForce(); });
 
 // ─── SERVICE WORKER ──────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
